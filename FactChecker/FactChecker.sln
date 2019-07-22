@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "FactChecker", "FactChecker\FactChecker.pyproj", "{8459D486-C91D-4022-B75C-CE6F26C9E557}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8459D486-C91D-4022-B75C-CE6F26C9E557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8459D486-C91D-4022-B75C-CE6F26C9E557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {008C6337-42D6-4F07-AEC6-76D9416FCC0F}
+	EndGlobalSection
+EndGlobal
