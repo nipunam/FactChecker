@@ -25,6 +25,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FactChecker.py" />
+    <Compile Include="WikiData.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SentenceSimilarity.py">
       <SubType>Code</SubType>
     </Compile>
