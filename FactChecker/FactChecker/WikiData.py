@@ -24,4 +24,4 @@ class WikiData:
 
 
 if __name__ == "__main__":
-	WikiData.get_sentence("India")
+	WikiData.get_sentence("Hyderabad")
