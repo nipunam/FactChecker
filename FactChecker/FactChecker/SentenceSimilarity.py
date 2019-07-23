@@ -2,8 +2,10 @@ import nltk
 import gensim
 import numpy as np
 from nltk.corpus import stopwords
+import re
+
 class SentenceSimilarity(object):
-	model = gensim.models.KeyedVectors.load_word2vec_format('C:/Users/rapotham/Desktop/Word2Vec/GoogleNews-vectors-negative300.bin.gz', binary=True,limit =500000)  
+	model = gensim.models.KeyedVectors.load_word2vec_format('C:/data/GoogleNews-vectors-negative300.bin.gz', binary=True,limit =500000)  
 	stops = set(stopwords.words('english'))
 	@staticmethod
 	def CosineSimilarity(vec1, vec2):
@@ -22,19 +24,23 @@ class SentenceSimilarity(object):
 		for word in wordList:
 			if word.lower() in SentenceSimilarity.stops:
 				continue
-			else:
+			elif word.lower() in model :
 				vec = vec + model[word.lower()]
 				wordCount = wordCount + 1
+		if wordCount == 0: return vec
 		return vec/wordCount
 	@staticmethod
 	def ComputeSentenceSimilarityScoreWithWordToVec(sentence1, sentence2):
+		print("Sentence 2: " + sentence2)
+		sentence1 = re.sub(r'[^\w]', ' ', sentence1)
+		sentence2 = re.sub(r'[^\w]', ' ', sentence2)
 		wordsList1 = nltk.tokenize.word_tokenize(sentence1)
 		wordsList2 = nltk.tokenize.word_tokenize(sentence2)
 		vec1 = SentenceSimilarity.GetVector(wordsList1, SentenceSimilarity.model)
 		vec2 = SentenceSimilarity.GetVector(wordsList2, SentenceSimilarity.model)
 		return SentenceSimilarity.CosineSimilarity(vec1, vec2)
 if __name__=="__main__":
-	sentence1 = "what are you doing this Sunday"
+	sentence1 = "what are you doing this Sunday?"
 	sentence2 = "sunday is a holiday for us"
 	print(SentenceSimilarity.ComputeSentenceSimilarityScoreWithWordToVec(sentence1, sentence2))
 	print(SentenceSimilarity.ComputeSentenceSimilarityScoreWithWordToVec(sentence2, sentence1))
