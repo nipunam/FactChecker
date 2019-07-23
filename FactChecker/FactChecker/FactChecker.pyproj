@@ -5,6 +5,7 @@
     <ProjectGuid>8459d486-c91d-4022-b75c-ce6f26c9e557</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>WikiData.py</StartupFile>
+    <StartupFile>DLFactory.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DLFactory.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DLModel.py">
       <SubType>Code</SubType>
     </Compile>

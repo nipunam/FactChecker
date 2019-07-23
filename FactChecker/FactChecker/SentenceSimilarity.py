@@ -31,7 +31,6 @@ class SentenceSimilarity(object):
 		return vec/wordCount
 	@staticmethod
 	def ComputeSentenceSimilarityScoreWithWordToVec(sentence1, sentence2):
-		print("Sentence 2: " + sentence2)
 		sentence1 = re.sub(r'[^\w]', ' ', sentence1)
 		sentence2 = re.sub(r'[^\w]', ' ', sentence2)
 		wordsList1 = nltk.tokenize.word_tokenize(sentence1)

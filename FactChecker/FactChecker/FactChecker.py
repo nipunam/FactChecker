@@ -3,7 +3,7 @@ import EntityExtraction
 import SentenceSimilarity
 import heapq
 import numpy
-import DLModel
+import DLFactory
 import sys
 
 class FactChecker(object):
@@ -42,15 +42,14 @@ class FactChecker(object):
         print(top_sentences)
         # Get results from model.
         paragraph = ".".join(top_sentences)
+        print("paragraph:: " + paragraph)
         print("=========== Finding answer ============")
-        answer = DLModel.DLModel.get_answer(paragraph, query)
+        answer = DLFactory.DLFactory.predict_answer(query, paragraph)
         print(answer)
         return answer
-
-
 if __name__ == "__main__":
-    FactChecker.find_answer(sys.argv[1])
-    for line in sys.stdin:
-        if line == "exit":
-            break
-        FactChecker.find_answer(line)
+	FactChecker.find_answer(sys.argv[1])
+	for line in sys.stdin:
+		if line == "exit":
+				break
+		FactChecker.find_answer(line)
