@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>8459d486-c91d-4022-b75c-ce6f26c9e557</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>FactChecker.py</StartupFile>
+    <StartupFile>SentenceSimilarity.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,6 +26,9 @@
     </Compile>
     <Compile Include="FactChecker.py" />
     <Compile Include="WikiData.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SentenceSimilarity.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
