@@ -3,6 +3,7 @@ import EntityExtraction
 import SentenceSimilarity
 import heapq
 import numpy
+import DLModel
 
 class FactChecker(object):
 	
@@ -18,6 +19,8 @@ class FactChecker(object):
         results_sentences = []
         for top_index in top_k_indx:
             results_sentences.append(sentences[top_index])
+
+        # TODO add sentences which contains entities.
         return results_sentences
     
     @staticmethod
@@ -32,3 +35,7 @@ class FactChecker(object):
         top_sentences = get_top_sentences(query, sentences)
         print(top_sentences)
         # Get results from model.
+        paragraph = ".".join(top_sentences)
+        answer = DLModel.DLModel.get_answer(paragraph, query)
+        print(answer)
+        return answer
