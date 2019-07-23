@@ -17,11 +17,11 @@ class WikiData:
 			print("Sections...")
 			content = page.content
 			# TODO : Remove section heading which starts and ends with ===.
-			sentences.append(sent_tokenize(content))
+			sentences.extend(sent_tokenize(content))
 		print("Sentences..")
 		print(sentences)
 		return sentences
 
 
 if __name__ == "__main__":
-	WikiData.get_sentence(sys.argv[1])
+	WikiData.get_sentence("India")

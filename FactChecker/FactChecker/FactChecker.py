@@ -4,6 +4,7 @@ import SentenceSimilarity
 import heapq
 import numpy
 import DLModel
+import sys
 
 class FactChecker(object):
 	
@@ -14,7 +15,7 @@ class FactChecker(object):
         for sentence in sentences:
             scores.append(SentenceSimilarity.SentenceSimilarity.ComputeSentenceSimilarityScoreWithWordToVec(query, sentence))
         nscores = numpy.array(scores)
-        top_k_indx = heapq.nlargest(k, range(len(a)), a.take)
+        top_k_indx = heapq.nlargest(k, range(len(nscores)), nscores.take)
 
         results_sentences = []
         for top_index in top_k_indx:
@@ -26,16 +27,30 @@ class FactChecker(object):
     @staticmethod
     def find_answer(query):
         # find entities.
+        print("=========== Finding entities ============")
         entities = EntityExtraction.EntityExtraction.get_named_entities(query)
+        print(entities)
         # Get sentences
+        print("=========== Finding sentences ============")
         sentences = []
         for entity in entities:
-            sentences.append(WikiData.WikiData.get_sentence(entity))
+            sentences.extend(WikiData.WikiData.get_sentence(entity))
+        print(sentences)
         # Top sentences
-        top_sentences = get_top_sentences(query, sentences)
+        print("=========== Finding top sentences ============")
+        top_sentences = FactChecker.get_top_sentences(query, sentences)
         print(top_sentences)
         # Get results from model.
         paragraph = ".".join(top_sentences)
+        print("=========== Finding answer ============")
         answer = DLModel.DLModel.get_answer(paragraph, query)
         print(answer)
         return answer
+
+
+if __name__ == "__main__":
+    FactChecker.find_answer(sys.argv[1])
+    for line in sys.stdin:
+        if line == "exit":
+            break
+        FactChecker.find_answer(line)
