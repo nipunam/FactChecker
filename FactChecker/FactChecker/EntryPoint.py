@@ -2,8 +2,9 @@ from flask import Flask
 from flask import render_template
 from flask import jsonify
 from flask import request
-#import FactChecker
-
+import FactChecker
+## python FactChecker/FactChecker/EntryPoint.py
+## Go to http://127.0.0.1:5000/hello/
 app = Flask(__name__, static_url_path='/static')
 
 questions = []
@@ -19,8 +20,7 @@ def answers():
 @app.route('/hello/answer/')
 def answer():
     question = request.args.get('question')
-    answer = "answer" 
-    # FactChecker.FactChecker.find_answer(question)
+    answer = FactChecker.FactChecker.find_answer(question)
     response = { "question": question, "answer": answer}
     questions.append(response)
     return jsonify(response)
