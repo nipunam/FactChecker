@@ -29,12 +29,11 @@ class FactChecker(object):
         # find entities.
         print("=========== Finding entities ============")
         entities = EntityExtraction.EntityExtraction.get_named_entities(query)
+        entities.append(query)
         print(entities)
         # Get sentences
         print("=========== Finding sentences ============")
-        sentences = []
-        for entity in entities:
-            sentences.extend(WikiData.WikiData.get_sentence(entity))
+        sentences =  WikiData.WikiData.get_sentence(entities)
         print(sentences)
         # Top sentences
         print("=========== Finding top sentences ============")
