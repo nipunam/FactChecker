@@ -1,0 +1,119 @@
+﻿<html>
+<style type="text/css">
+    {
+        font-size: 14pt;
+    }
+
+    #search {
+        width: 80%;
+        margin: auto;
+        display: block;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    #searchin {
+        float: left;
+        width: 90%;
+        height: 30px;
+    }
+
+    #btngo {
+        float: left;
+        width: 10%;
+        height: 30px;
+        background-color: #333;
+        color: white;
+        border: none;
+        font-weight: bold;
+    }
+
+    #list {
+        padding: 0;
+        list-style-type: none;
+        display: none;
+        position: absolute;
+        z-index: 9999;
+        width: 80%;
+        margin-top: 30px;
+        max-height: 120px;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+        #list > li {
+            text-align: left;
+            padding: 5px;
+            display: none;
+        }
+
+            #list > li:hover {
+                background-color: #eee;
+            }
+</style>
+<head>
+</head>
+<body>
+
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('#searchin').bind('input', function () {
+            document.getElementById("list").style.display = "none";
+            document.getElementById("btngo").disabled = true;
+
+            if ($(this).val() != "") {
+                var list = document.getElementById("list").childNodes;
+                for (var i = 0; i < list.length; i++) {
+                    var values = list[i].innerHTML;
+                    if (values) {
+                        list[i].style.display = "none";
+                        if (values.toLowerCase().includes($(this).val().toLowerCase()) == 1) {
+                            document.getElementById("list").style.display = "block";
+                            list[i].style.display = "block";
+                        }
+                        else {
+                            list[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        });
+
+        function search() {
+            var query = document.getElementById("searchin").value;
+            $.ajax({
+                url: "answer/?question=" + query, success: function (result) {
+                    $("#question").html(result.question);
+                    $("#answer").html(result.answer);
+                }
+            });
+        }
+
+        $("#list li").click(function () {
+            document.getElementById("searchin").value = this.outerText;
+            document.getElementById("list").style.display = "none";
+            document.getElementById("btngo").disabled = false;
+
+            var link = $(this).attr("href");
+
+            document.getElementById("btngo").addEventListener("click", function () {
+                window.open(link, '_self', false)
+            })
+        });
+    </script>
+    <div id="search">
+        <div id="container1">
+            <input type="text" id="searchin" placeholder="Search..." list="list" />
+            <button id="btngo" class="btn btn-primary" type="button" onclick="search()">Go</button>
+        </div>
+        <div id="result">
+            <div id="question"></div>
+            <b><div id="answer"></div></b>
+
+        </div>
+</body>
+</html>
