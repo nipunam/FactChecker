@@ -31,6 +31,7 @@
     <Compile Include="EntityExtraction.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EntryPoint.py" />
     <Compile Include="FactChecker.py" />
     <Compile Include="WikiApi.py">
       <SubType>Code</SubType>
