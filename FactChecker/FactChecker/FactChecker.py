@@ -1,4 +1,4 @@
-import WikiApi
+import WikiData
 import EntityExtraction
 import SentenceSimilarity
 import heapq
@@ -34,7 +34,7 @@ class FactChecker(object):
         print("=========== Finding sentences ============")
         sentences = []
         for entity in entities:
-            sentences.extend(WikiApi.WikiApi.get_sentence(entity))
+            sentences.extend(WikiData.WikiData.get_sentence(entity))
         print(sentences)
         # Top sentences
         print("=========== Finding top sentences ============")
