@@ -4,9 +4,9 @@ import sys
 
 class WikiData:
 	@staticmethod
-	def get_sentence(entity):
-		titles = wikipedia.search(entity, results=1)
-		print("Search results");
+	def get_sentence(entities):
+		titles = WikiData.get_titles(entities)
+		print("Search results")
 		print(titles)
 		sentences = []
 		for title in titles:
@@ -22,6 +22,19 @@ class WikiData:
 		print(sentences)
 		return sentences
 
+	@staticmethod
+	def get_titles(entities):
+		titles = []
+		for entity in entities:
+			titles.extend(wikipedia.search(entity, results=2))
+		titles = WikiData.unique_list(titles)
+		return titles
+
+	@staticmethod
+	def unique_list(l):
+		ulist = []
+		[ulist.append(x) for x in l if x not in ulist]
+		return ulist
 
 if __name__ == "__main__":
-	WikiData.get_sentence("Hyderabad")
+	WikiData.get_sentence(["India", "what is biggest city in India?"])
