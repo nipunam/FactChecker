@@ -29,26 +29,31 @@ class FactChecker(object):
         # find entities.
         print("=========== Finding entities ============")
         entities = EntityExtraction.EntityExtraction.get_named_entities(query)
-        entities.append(query)
-        print(entities)
+        #entities.append(query)
+        ## print(entities)
         # Get sentences
         print("=========== Finding sentences ============")
         sentences =  WikiData.WikiData.get_sentence(entities)
-        print(sentences)
+        ## print(sentences)
         # Top sentences
         print("=========== Finding top sentences ============")
         top_sentences = FactChecker.get_top_sentences(query, sentences)
         print(top_sentences)
         # Get results from model.
-        paragraph = ".".join(top_sentences)
+        paragraph = " "
+        for sentence in sentences:
+            if (paragraph.endswith('.')):
+                paragraph = paragraph + sentence
+            else:
+                paragraph = paragraph +('.')+ sentence
         print("paragraph:: " + paragraph)
         print("=========== Finding answer ============")
         answer = DLFactory.DLFactory.predict_answer(query, paragraph)
         print(answer)
         return answer
 if __name__ == "__main__":
-	FactChecker.find_answer(sys.argv[1])
-	for line in sys.stdin:
-		if line == "exit":
-				break
-		FactChecker.find_answer(line)
+    FactChecker.find_answer(sys.argv[1])
+    for line in sys.stdin:
+        if line == "exit":
+           break
+        FactChecker.find_answer(line)
