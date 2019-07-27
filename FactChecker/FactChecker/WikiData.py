@@ -6,8 +6,8 @@ import re
 class WikiData:
     @staticmethod
     def preprocess_content(content):
-        content = re.sub(r'[=]{2,} .* [=]{2,}', '', content)
-        content = content.replace('\n','').replace('\r','')
+        content = re.sub(r'[=]{2,} .* [=]{2,}', ' ', content)
+        content = content.replace('\n','. ').replace('\r','. ')
         content = re.sub(r'\.+', ".", content)
         return content
 
@@ -35,7 +35,7 @@ class WikiData:
     def get_titles(entities):
         titles = []
         for entity in entities:
-            titles.extend(wikipedia.search(entity, results=2))
+            titles.extend(wikipedia.search(entity, results=1))
         titles = WikiData.unique_list(titles)
         return titles
 
